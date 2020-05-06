@@ -1,0 +1,62 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+  background: linear-gradient(to top, rgb(90, 0, 0), red);
+}
+
+article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+article section {
+  margin: 1em;
+  width: 50%;
+}
+
+
+title {
+  display: block;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+#controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#controls div {
+  margin: 1em;
+}
+
+#credits a {
+  display: block;
+}
+
+a {
+  color: skyblue;
+}
+
+kbd {
+  display: block;
+  margin: 1em;
+  background: rgb(255, 210, 210);
+  border-radius: 0.3em;
+  color: black;
+  padding: 1em;
+}
+
+iframe {
+  background: radial-gradient(black, red);
+  box-shadow: 0 0 10px black;
+}

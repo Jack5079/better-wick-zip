@@ -1,0 +1,44 @@
+body, html {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  color: white;
+  overflow: hidden;
+}
+
+a {
+  color: skyblue
+}
+
+#wick-canvas-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#preloader {
+  position: absolute;
+  text-align: center;
+  background: radial-gradient(black, red);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+@keyframes fade {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(6);
+    opacity: 0;
+  }
+}
+
+.tip {
+  word-break: break-all;
+}

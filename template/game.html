@@ -1,0 +1,70 @@
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Loading...</title>
+        <link rel="stylesheet" href="game.css">
+        <noscript>
+            <meta http-equiv="refresh" content="0;url=noscript.html">
+        </noscript>
+    </head>
+
+    <body>
+        <!-- Preloader -->
+        <div id="preloader">
+            <main>
+                <script>
+                    if (top === window) {
+                        location = './'
+                    }
+                </script>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    style="margin: auto; display: block; shape-rendering: auto;" width="200px" height="200px"
+                    viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <circle cx="50" cy="50" fill="none" stroke="#fff" stroke-width="10" r="35"
+                        stroke-dasharray="164.93361431346415 56.97787143782138">
+                        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s"
+                            values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+                    </circle>
+                </svg>
+            </main>
+        </div>
+        </div>
+
+        <!-- Wick project canvas container -->
+        <div id="wick-canvas-container"></div>
+        <script src="wickengine.js"></script>
+        <script>
+            // Download project
+            fetch('project.wick')
+                .then(resp => resp.blob())
+                .then(blob => {
+                    // Run project
+                    Wick.WickFile.fromWickFile(blob, project => {
+                        project.inject(document.getElementById('wick-canvas-container'));
+
+                        // Hide preloader
+                        document.getElementById('preloader').style.animation = 'fade 1s forwards';
+                        setTimeout(document.getElementById('preloader').remove.bind(document.getElementById('preloader')), 1000)
+                    });
+                })
+                .catch((e) => {
+                    document.body.innerHTML = `
+                        <p style="float: right">:-(<p>
+                        <h1>Error!<h1>
+                        <h4>An error happened while loading {{TITLE}}.</h4>
+                        <pre>${e.toString()}</pre>`
+                    document.body.style.background = `blue`
+                    document.body.style.color = 'white'
+                    document.body.style.fontFamily = 'sans-serif'
+                });
+        </script>
+
+    </body>
+
+</html>
