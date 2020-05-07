@@ -2,6 +2,10 @@
   "env": {
     "browser": true
   },
+  "globals": {
+    "JSZip": true,
+    "Promise": true
+  },
   "parserOptions": {
     "ecmaFeatures": {
       "impliedStrict": true

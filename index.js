@@ -1,4 +1,3 @@
-/* global JSZip, Promise */
 const indexTemplate = fetch('./template/index.html').then(res=>res.text()).then(txt=>new DOMParser().parseFromString(txt, 'text/html'))
 const gameTemplate = fetch('./template/game.html').then(res=>res.text())
 const pageProm = Promise.all([
