@@ -4,6 +4,7 @@ html {
   background: linear-gradient(to top right, blue, red);
   color: white;
   display: flex;
+  text-align: center;
   justify-content: center;
   align-items: center;
   font-family: 'Inter', sans-serif;
