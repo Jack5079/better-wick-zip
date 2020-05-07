@@ -32,3 +32,8 @@ body {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.274);
   background: #222233;
 }
+
+main {
+  transition: transform 1s, opacity 1s;
+  will-change: transform, opacity;
+}
