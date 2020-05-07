@@ -13,20 +13,23 @@
   <body>
     <title>Better Wick Export</title>
     <h3>Planning on publishing your Wick Editor game on your website, instead of itch.io? Try this!</h1>
-      <fieldset>
-        <legend>Keybinds</legend>
-        <button id="addkey">Add keybind</button>
-        <section id="controls">
-        </section>
-        <p>Double click a keybind to remove it. You don't need to fill this in!</p>
-      </fieldset>
       <main id="start">
-        <label for="upload" accept=".wick">Upload your .wick file:</label>
-        <input type="file" name="upload" id="upload">
-        <p>Note: You must add icon.png, and the credits section manually.</p>
+        <fieldset>
+          <legend>Keybinds (Optional)</legend>
+          <button type="button" id="addkey">Add keybind</button>
+          <section id="controls">
+          </section>
+        </fieldset>
+        <fieldset>
+          <legend>Credits (Optional)</legend>
+          <article contenteditable id="credits"></article>
+        </fieldset>
+      <label for="icon">Upload an .png icon (Optional):</label><input accept="image/png" type="file" name="icon" id="icon">
+        <label for="upload">Finally, upload your .wick file:</label>
+        <input type="file" accept=".wick" name="upload" id="upload">
       </main>
-      <footer>
-        <a href="https://jack5079.github.io">jack<sup style="font-family: monospace">5079</sup></a>
+      <footer style="margin-top: 1em;">
+        by <a href="https://jack5079.github.io">jack<sup style="font-family: monospace">5079</sup></a>
       </footer>
       <script src="jszip.min.js"></script>
       <script src="index.js"></script>

@@ -33,9 +33,13 @@ document.getElementById('upload').addEventListener('change', async event => {
   if (!document.querySelectorAll('#controls *').length) {
     indexDocument.getElementById('controlsect').remove()
   } else {
-
     document.querySelectorAll('#controls span, #controls kbd').forEach(ele=>ele.contentEditable = false)
     indexDocument.getElementById('controls').innerHTML = document.getElementById('controls').innerHTML
+  }
+  if (document.getElementById('credits').innerHTML.trim().length) {
+    indexDocument.getElementById('credits').innerHTML += document.getElementById('credits').innerHTML
+  } else {
+    indexDocument.getElementById('credits').remove()
   }
   console.log('Zip created.')
   const zip = new JSZip()
@@ -43,6 +47,9 @@ document.getElementById('upload').addEventListener('change', async event => {
   zip.file('game.html', ( await gameTemplate).replace('{{TITLE}}', name))
   zip.file('project.wick', proj)
   zip.file('wickengine.js', fetch('https://raw.githubusercontent.com/Wicklets/wick-editor/master/engine/dist/wickengine.js').then(res=>res.blob()))
+  if (document.getElementById('icon').files.length) {
+    zip.file('icon.png', document.getElementById('icon').files[0])
+  }
   const pages = await pageProm
   pages.forEach( arr => zip.file(...arr))
   const link = document.createElement('a')
