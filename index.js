@@ -6,9 +6,23 @@ const pageProm = Promise.all([
   'noscript.html',
   'style.css'
 ].map(async url=>[url, await fetch(`./template/${url}`).then(res=>res.blob())]))
+document.getElementById('addkey').addEventListener('click', () => {
+  const kdb = document.createElement('kbd')
+  const span = document.createElement('span')
+  const keybind = document.createElement('div')
+  kdb.contentEditable = true
+  kdb.innerText = 'A'
+  span.contentEditable = true
+  span.innerText = 'example'
+  keybind.appendChild(kdb)
+  keybind.appendChild(span)
+  keybind.addEventListener('dblclick', ()=>{
+    keybind.remove()
+  })
+  document.getElementById('controls').appendChild(keybind)
+})
 document.getElementById('upload').addEventListener('change', async event => {
   const [proj] = [...event.target.files]
-  document.getElementById('start').style = 'transform: translateY(-10px); opacity: 0'
   console.log('Unzipping...')
   const project = await new JSZip().loadAsync(await proj.arrayBuffer())
   console.log('Importing...')
@@ -17,6 +31,13 @@ document.getElementById('upload').addEventListener('change', async event => {
   indexDocument.getElementById('game').width = width
   indexDocument.getElementById('game').height = height
   indexDocument.querySelector('title').innerText = name
+  if (!document.querySelectorAll('#controls *').length) {
+    indexDocument.getElementById('controls').remove()
+  } else {
+
+    document.querySelectorAll('#controls span, #controls kbd').forEach(ele=>ele.contentEditable = false)
+    indexDocument.getElementById('controls').innerHTML = document.getElementById('controls').innerHTML
+  }
   console.log('Zip created.')
   const zip = new JSZip()
   zip.file('index.html', indexDocument.documentElement.outerHTML)
@@ -25,7 +46,6 @@ document.getElementById('upload').addEventListener('change', async event => {
   zip.file('wickengine.js', fetch('https://raw.githubusercontent.com/Wicklets/wick-editor/master/engine/dist/wickengine.js').then(res=>res.blob()))
   const pages = await pageProm
   pages.forEach( arr => zip.file(...arr))
-  document.getElementById('start').style = 'transform: translateY(0); opacity: 1'
   const link = document.createElement('a')
   link.href = URL.createObjectURL(await zip.generateAsync({type: 'blob'}))
   link.download = name + '.zip'
@@ -33,4 +53,5 @@ document.getElementById('upload').addEventListener('change', async event => {
   document.body.appendChild(link)
   link.click()
   URL.revokeObjectURL(link.href)
+  location.reload()
 })

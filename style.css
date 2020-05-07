@@ -33,7 +33,21 @@ body {
   background: #222233;
 }
 
-main {
-  transition: transform 1s, opacity 1s;
-  will-change: transform, opacity;
+#controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#controls div {
+  margin: 1em;
+}
+
+kbd {
+  display: block;
+  margin: 1em;
+  background: rgb(255, 210, 210);
+  border-radius: 0.3em;
+  color: black;
+  padding: 1em;
 }
