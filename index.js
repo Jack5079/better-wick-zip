@@ -6,7 +6,8 @@ const pageProm = Promise.all([
   'noscript.html',
   'style.css'
 ].map(async url=>[url, await fetch(`./template/${url}`).then(res=>res.blob())]))
-async function addProject (proj) {
+document.getElementById('upload').addEventListener('change', async event => {
+  const [proj] = [...event.target.files]
   console.log('Unzipping...')
   const project = await new JSZip().loadAsync(await proj.arrayBuffer())
   console.log('Importing...')
@@ -23,21 +24,11 @@ async function addProject (proj) {
   zip.file('wickengine.js', fetch('https://raw.githubusercontent.com/Wicklets/wick-editor/master/engine/dist/wickengine.js').then(res=>res.blob()))
   const pages = await pageProm
   pages.forEach( arr => zip.file(...arr))
-  return {
-    name,
-    blob: await zip.generateAsync({type: 'blob'})
-  }
-}
-
-document.getElementById('upload').addEventListener('change', event => {
-  const [file] = [...event.target.files]
-  addProject(file).then(({name, blob})=>{
-    const link = document.createElement('a')
-    link.href = URL.createObjectURL(blob)
-    link.download = name + '.zip'
-    link.style.display = 'none'
-    document.body.appendChild(link)
-    link.click()
-    URL.revokeObjectURL(link.href)
-  })
+  const link = document.createElement('a')
+  link.href = URL.createObjectURL(await zip.generateAsync({type: 'blob'}))
+  link.download = name + '.zip'
+  link.style.display = 'none'
+  document.body.appendChild(link)
+  link.click()
+  URL.revokeObjectURL(link.href)
 })
