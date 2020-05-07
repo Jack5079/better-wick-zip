@@ -30,16 +30,14 @@ async function addProject (proj) {
 }
 
 document.getElementById('upload').addEventListener('change', event => {
-  const files = [...event.target.files]
-  Promise.all(files.map(addProject)).then(arr=>{
-    arr.forEach(({name, blob})=>{
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.download = name + '.zip'
-      link.style.display = 'none'
-      document.body.appendChild(link)
-      link.click()
-      URL.revokeObjectURL(link.href)
-    })
+  const [file] = [...event.target.files]
+  addProject(file).then(({name, blob})=>{
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = name + '.zip'
+    link.style.display = 'none'
+    document.body.appendChild(link)
+    link.click()
+    URL.revokeObjectURL(link.href)
   })
 })
