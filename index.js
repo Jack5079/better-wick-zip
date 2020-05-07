@@ -31,7 +31,7 @@ document.getElementById('upload').addEventListener('change', async event => {
   indexDocument.getElementById('game').height = height
   indexDocument.querySelector('title').innerText = name
   if (!document.querySelectorAll('#controls *').length) {
-    indexDocument.getElementById('controls').remove()
+    indexDocument.getElementById('controlsect').remove()
   } else {
 
     document.querySelectorAll('#controls span, #controls kbd').forEach(ele=>ele.contentEditable = false)
