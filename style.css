@@ -1,5 +1,11 @@
 @import url('https://rsms.me/inter/inter.css');
 html {
+  height: 100%;
+  background: linear-gradient(to top right, blue, red);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: 'Inter', sans-serif;
 }
 
@@ -9,15 +15,19 @@ html {
   }
 }
 
-body {
-  background: black;
-  color: white;
-}
 title {
   display: block;
   font-size: 2em;
   font-weight: bold;
 }
+
 a {
   color: skyblue;
+}
+
+body {
+  padding: 1em;
+  border-radius: 2em;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.274);
+  background: #222233;
 }
